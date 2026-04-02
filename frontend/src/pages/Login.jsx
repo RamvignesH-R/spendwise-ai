@@ -21,9 +21,9 @@ export default function Login() {
       const res = await axios.post('http://15.206.178.181:8000/auth/login', formData, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
-      
+
       const token = res.data.access_token;
-      
+
       const userRes = await axios.get('http://15.206.178.181:8000/auth/me', {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -31,7 +31,9 @@ export default function Login() {
       setAuth(userRes.data, token);
       navigate('/dashboard');
     } catch (err) {
-      setError('Invalid credentials');
+      const msg = err?.response?.data?.detail || err?.message || 'Unknown error';
+      setError(`Error: ${msg}`);
+      console.error(err);
     }
   };
 
@@ -41,7 +43,7 @@ export default function Login() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[100px]" />
       </div>
-      
+
       <div className="glass-card w-full max-w-md p-8 z-10 relative">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -55,8 +57,8 @@ export default function Login() {
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Work Email</label>
-            <input 
-              type="email" 
+            <input
+              type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
@@ -65,15 +67,15 @@ export default function Login() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               className="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
               required
             />
           </div>
-          
+
           <button type="submit" className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary text-white font-medium p-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(124,58,237,0.4)]">
             <LogIn size={20} />
             Sign In to Portal
