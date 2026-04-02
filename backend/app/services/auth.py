@@ -1,7 +1,8 @@
 import os
 from datetime import datetime, timedelta
 from typing import Optional
-from jose import JWTError, jwt
+import jwt
+from jwt import PyJWTError as JWTError
 import hashlib
 import binascii
 import os
