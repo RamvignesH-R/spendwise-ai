@@ -10,3 +10,5 @@ pymongo
 boto3
 pydantic[email]
 python-multipart
+
+requests
