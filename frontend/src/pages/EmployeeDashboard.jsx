@@ -10,7 +10,7 @@ export default function EmployeeDashboard() {
   useEffect(() => {
     const fetchExpenses = async () => {
       try {
-        const res = await axios.get('http://15.206.178.181:8000/expenses/', {
+        const res = await axios.get('/api/expenses/', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setExpenses(res.data);

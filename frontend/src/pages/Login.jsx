@@ -18,13 +18,13 @@ export default function Login() {
       formData.append('username', email);
       formData.append('password', password);
 
-      const res = await axios.post('http://15.206.178.181:8000/auth/login', formData, {
+      const res = await axios.post('/api/auth/login', formData, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
 
       const token = res.data.access_token;
 
-      const userRes = await axios.get('http://15.206.178.181:8000/auth/me', {
+      const userRes = await axios.get('/api/auth/me', {
         headers: { Authorization: `Bearer ${token}` }
       });
 

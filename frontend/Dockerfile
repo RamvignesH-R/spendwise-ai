@@ -11,12 +11,15 @@ RUN npm run build
 # Server stage
 FROM nginx:alpine
 
-# Copy built assets to Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Explicitly setup Nginx routing for React Router (SPA)
 RUN echo 'server { \
     listen 80; \
+    location /api/ { \
+        proxy_pass http://backend:8000/; \
+        proxy_set_header Host $host; \
+        proxy_set_header X-Real-IP $remote_addr; \
+    } \
     location / { \
         root /usr/share/nginx/html; \
         index index.html index.htm; \
