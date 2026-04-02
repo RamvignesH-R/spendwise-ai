@@ -23,7 +23,7 @@ export default function ApprovalDashboard() {
 
   const handleAction = async (id, action) => {
     try {
-      await axios.post(`http://localhost:8000/approvals/${id}/action`, { action, note: "Reviewed via portal" }, {
+      await axios.post(`http://15.206.178.181:8000/approvals/${id}/action`, { action, note: "Reviewed via portal" }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPending(pending.filter(p => p.id !== id));

@@ -21,7 +21,7 @@ export default function SubmitExpense() {
     setIsSubmitting(true);
     try {
       // Step 21 Integration: Submit directly triggers backend + ai service
-      await axios.post('http://localhost:8000/expenses/', {
+      await axios.post('http://15.206.178.181:8000/expenses/', {
         title: formData.title,
         amount: parseFloat(formData.amount),
         category: formData.category,

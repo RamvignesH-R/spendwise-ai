@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/logs', {
+        const res = await axios.get('http://15.206.178.181:8000/logs', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setLogs(res.data);
