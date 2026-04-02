@@ -22,7 +22,14 @@ export default function Login() {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
 
+      console.log('Login response:', res.data); // Add this to debug
+      
       const token = res.data.access_token;
+      
+      if (!token) {
+        setError('No token received: ' + JSON.stringify(res.data));
+        return;
+      }
 
       const userRes = await axios.get('/api/auth/me', {
         headers: { Authorization: `Bearer ${token}` }
