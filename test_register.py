@@ -1,9 +1,18 @@
 import urllib.request
-import urllib.parse
 import json
 
-data = urllib.parse.urlencode({'username': 'test2@spendwise.com', 'password': 'admin'}).encode('ascii')
-req = urllib.request.Request("http://15.206.178.181:8000/auth/login", data=data, headers={'Content-Type': 'application/x-www-form-urlencoded'})
+data = json.dumps({
+    "email": "test2@spendwise.com",
+    "password": "admin",
+    "name": "Test User",
+    "role": "Admin"
+}).encode('utf-8')
+
+req = urllib.request.Request(
+    "http://15.206.178.181:8000/auth/register", 
+    data=data,
+    headers={'Content-Type': 'application/json'}
+)
 
 try:
     with urllib.request.urlopen(req) as response:
