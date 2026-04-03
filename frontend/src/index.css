@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7c3aed;
+  --color-secondary: #ec4899;
+  --color-dark: #0a0a0f;
+}
 
 @layer base {
   body {
